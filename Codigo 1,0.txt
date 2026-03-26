@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Dieta Japonesa</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; background-color: #f4f4f4; }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #27ae60; }
+        h2 { color: #e67e22; background: #fff; padding: 10px; border-left: 5px solid #e67e22; margin-top: 30px; }
+        .refeicao { background: white; padding: 15px; margin-bottom: 5px; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        strong { color: #27ae60; }
+    </style>
+</head>
+<body>
+
+    <h1>Cardápio Semanal - Dieta Japonesa</h1>
+
+    <h2>Segunda-Feira</h2>
+    <div class="refeicao"><strong>Café da Manhã:</strong> Café ou chá com adoçante.</div>
+    <div class="refeicao"><strong>Almoço:</strong> Dois ovos cozidos e ervas a desejar.</div>
+    <div class="refeicao"><strong>Jantar:</strong> Um bife grande e salada de alface e pepino.</div>
+
+    <h2>Terça-Feira</h2>
+    <div class="refeicao"><strong>Café da Manhã:</strong> Café ou chá com adoçante e um biscoito água e sal.</div>
+    <div class="refeicao"><strong>Almoço:</strong> Um bife grande e salada de frutas à vontade.</div>
+    <div class="refeicao"><strong>Jantar:</strong> Presunto à vontade.</div>
+
+    <h2>Quarta-Feira</h2>
+    <div class="refeicao"><strong>Café da Manhã:</strong> Café ou chá com adoçante e um biscoito água e sal.</div>
+    <div class="refeicao"><strong>Almoço:</strong> Dois ovos cozidos, salada e tomate à vontade.</div>
+    <div class="refeicao"><strong>Jantar:</strong> Salada de repolho, tomate e cenoura à vontade.</div>
+
+
+    <h2>Quinta-Feira</h2>
+    <div class="refeicao"><strong>Café da Manhã:</strong> Café ou chá com adoçante e um biscoito água e sal.</div>
+    <div class="refeicao"><strong>Almoço:</strong> Um ovo cozido, uma cenoura cozida ou crua e uma fatia de queijo muçarela.</div>
+    <div class="refeicao"><strong>Jantar:</strong> Salada de frutas à vontade e um copo de iogurte natural.</div>
+
+    <h2>Sexta-Feira</h2>
+    <div class="refeicao"><strong>Café da Manhã:</strong> Café ou chá com adoçante e um biscoito água e sal.</div>
+    <div class="refeicao"><strong>Almoço:</strong> Filé de peixe grelhado com tomate à vontade.</div>
+    <div class="refeicao"><strong>Jantar:</strong> Um bife grande e salada de alface e pepino.</div>
+
+    <h2>Sábado</h2>
+    <div class="refeicao"><strong>Café da Manhã:</strong> Café ou chá com adoçante e um biscoito água e sal.</div>
+    <div class="refeicao"><strong>Almoço:</strong> Frango grelhado à vontade (peito de preferência).</div>
+    <div class="refeicao"><strong>Jantar:</strong> Dois ovos cozidos com salada de cenoura.</div>
+
+    <h2>Domingo</h2>
+    <div class="refeicao"><strong>Café da Manhã:</strong> Café ou chá com adoçante.</div>
+    <div class="refeicao"><strong>Almoço:</strong> Um bife grande e frutas à vontade.</div>
+    <div class="refeicao"><strong>Jantar:</strong> Comer o que quiser do cardápio desta semana (repetir uma refeição favorita).</div>
+
+</body>
+</html>
+    

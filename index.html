@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Semanal - Dieta Japonesa</title>
+    <style>
+        /* CONFIGURAÇÃO GERAL E FUNDO */
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            color: #333;
+            background-image: url('https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* TÍTULO PRINCIPAL */
+        h1 {
+            color: #b71c1c;
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ESTILO DA CALCULADORA DE IMC */
+        .calculadora-imc {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 2px solid #b71c1c;
+        }
+
+        .calculadora-imc h3 {
+            color: #b71c1c;
+            margin-top: 0;
+        }
+
+        .calculadora-imc input {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            width: 100px;
+        }
+
+        /* BOTÕES */
+        .calculadora-imc button {
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .btn-calcular {
+            background-color: #b71c1c;
+        }
+
+        .btn-calcular:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-limpar {
+            background-color: #555;
+        }
+
+        .btn-limpar:hover {
+            background-color: #333;
+        }
+
+        #resultado-imc {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-height: 25px;
+            /* Evita que o layout pule quando o texto aparece */
+        }
+
+        /* TÍTULOS DOS DIAS (H2) */
+        h2 {
+            color: white;
+            background: #b71c1c;
+            padding: 15px 25px;
+            margin-top: 40px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .jp-day {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-right: 15px;
+            font-size: 0.9em;
+        }
+
+        /* BLOCO DE REFEIÇÃO */
+        .refeicao {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .refeicao img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #b71c1c;
+        }
+
+        .tipo-refeicao {
+            font-weight: bold;
+            color: #b71c1c;
+            display: block;
+            font-size: 1.1em;
+        }
+
+        .dia-container .refeicao:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* RODAPÉ */
+        .rodape-observacao {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-top: 3px solid #b71c1c;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #444;
+        }
+
+        .rodape-observacao strong {
+            color: #b71c1c;
+        }
+
+        @media (max-width: 600px) {
+            .refeicao {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 1em;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .jp-day {
+                margin-right: 0;
+            }
+
+            .calculadora-imc input {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>DIETA JAPONESA <br>
+        <span style="font-size: 0.5em; font-weight: normal; color: #555;">Perca até 6 kilos em 7 dias!</span>
+    </h1>
+
+    <!-- CALCULADORA DE IMC -->
+    <div class="calculadora-imc">
+        <h3>Calcule seu IMC antes de começar</h3>
+        <input type="number" id="peso" placeholder="Peso (ex: 75)" step="0.1">
+        <input type="number" id="altura" placeholder="Altura (ex: 1.75)" step="0.01">
+        <br>
+        <button class="btn-calcular" onclick="calcularIMC()">Calcular</button>
+        <button class="btn-limpar" onclick="limparIMC()">Limpar</button>
+        <div id="resultado-imc"></div>
+    </div>
+
+    <!-- SEGUNDA -->
+    <div class="dia-container">
+        <h2><span class="jp-day">月曜日</span> SEGUNDA-FEIRA</h2>
+        <div class="refeicao">
+            <img src="imagens/café.jpg" alt="Café">
+            <div><span class="tipo-refeicao">Café da Manhã:</span> Café ou chá com adoçante.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://images.unsplash.com/photo-1516448620398-c5f44bf9f441?w=200" alt="Almoço">
+            <div><span class="tipo-refeicao">Almoço:</span> 02 Ovos cozidos com sal e verduras a vontade.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=200" alt="Jantar">
+            <div><span class="tipo-refeicao">Jantar:</span> 1-Bife grande, salada de pepino e alface a vontade.</div>
+        </div>
+    </div>
+
+    <!-- TERÇA -->
+    <div class="dia-container">
+        <h2><span class="jp-day">火曜日</span> TERÇA-FEIRA</h2>
+        <div class="refeicao">
+            <img src="imagens/café.jpg" alt="Café">
+            <div><span class="tipo-refeicao">Café da Manhã:</span> Café/chá e um biscoito água e sal.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://static.vecteezy.com/ti/fotos-gratis/p2/1827252-bife-com-vegetais-em-um-prato-branco-gratis-foto.jpg"
+                alt="Almoço">
+            <div><span class="tipo-refeicao">Almoço:</span> Verdura a vontade, 1 bife grande e frutas a vontade.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://media.istockphoto.com/id/175417570/pt/foto/fiambre-em-fatias.jpg?s=170667a&w=0&k=20&c=o_fqMfp3BClijfOdxcqOTd67qHlMRit8PQUrHPjmOjg="
+                alt="Jantar">
+            <div><span class="tipo-refeicao">Jantar:</span> Só presunto a vontade.</div>
+        </div>
+    </div>
+
+    <!-- QUARTA -->
+    <div class="dia-container">
+        <h2><span class="jp-day">水曜日</span> QUARTA-FEIRA</h2>
+        <div class="refeicao">
+            <img src="imagens/café.jpg" alt="Café">
+            <div><span class="tipo-refeicao">Café da Manhã:</span> Café/chá e um biscoito água e sal.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://img.freepik.com/fotos-premium/salada-fresca-com-tomate-azeitonas-ovos-cozidos-e-sanduiche-com-ricota-e-abacate_2829-21752.jpg"
+                alt="Almoço">
+            <div><span class="tipo-refeicao">Almoço:</span> 02 Ovos cozidos com sal, salada e tomate a vontade.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://i.ytimg.com/vi/Y4hnY6Z86vg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAiDUYlMlm9NEUlXOauF1KjWnNIiQ"
+                alt="Jantar">
+            <div><span class="tipo-refeicao">Jantar:</span> Presunto e salada de repolho, cenoura, chuchu a vontade.
+            </div>
+        </div>
+    </div>
+
+    <!-- QUINTA -->
+    <div class="dia-container">
+        <h2><span class="jp-day">木曜日</span> QUINTA-FEIRA</h2>
+        <div class="refeicao">
+            <img src="imagens/café.jpg" alt="Café">
+            <div><span class="tipo-refeicao">Café da Manhã:</span> Café/chá e um biscoito água e sal.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=200" alt="Almoço">
+            <div><span class="tipo-refeicao">Almoço:</span> 1 Ovo cozido, cenoura crua ou cozida e 1 fatia de queijo.
+            </div>
+        </div>
+        <div class="refeicao">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0F4sJHZwQhAgTTO3K-1y1RmRaPrGRGH7npA&s"
+                alt="Jantar">
+            <div><span class="tipo-refeicao">Jantar:</span> Salada de frutas a vontade e iogurte natural.</div>
+        </div>
+    </div>
+
+    <!-- SEXTA -->
+    <div class="dia-container">
+        <h2><span class="jp-day">金曜日</span> SEXTA-FEIRA</h2>
+        <div class="refeicao">
+            <img src="imagens/café.jpg" alt="Café">
+            <div><span class="tipo-refeicao">Café da Manhã:</span> Café/chá e um biscoito água e sal.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://i.ytimg.com/vi/kP4V4vq3vWM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD6uVl4Y8NpkCyJWYneyraqyxxmHg"
+                alt="Almoço">
+            <div><span class="tipo-refeicao">Almoço:</span> Tomate a vontade e filé de peixe.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://i.ytimg.com/vi/-f0Q3TTlNUU/maxresdefault.jpg" alt="Jantar">
+            <div><span class="tipo-refeicao">Jantar:</span> Bife e salada de frutas a vontade.</div>
+        </div>
+    </div>
+
+    <!-- SÁBADO -->
+    <div class="dia-container">
+        <h2><span class="jp-day">土曜日</span> SÁBADO</h2>
+        <div class="refeicao">
+            <img src="imagens/café.jpg" alt="Café">
+            <div><span class="tipo-refeicao">Café da Manhã:</span> Café/chá e um biscoito água e sal.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://acheireceitas.com/wp-content/uploads/2025/10/Frango-Assado-Recheado-1024x683.jpeg"
+                alt="Almoço">
+            <div><span class="tipo-refeicao">Almoço:</span> Frango assado a vontade.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://static.itdg.com.br/images/640-auto/fc6b59ba02ab52d011757139cb093fac/isa-editorial-2025-09-18t121437.479.jpg"
+                alt="Jantar">
+            <div><span class="tipo-refeicao">Jantar:</span> 02 Ovos cozidos com sal.</div>
+        </div>
+    </div>
+
+    <!-- DOMINGO -->
+    <div class="dia-container">
+        <h2><span class="jp-day">日曜日</span> DOMINGO</h2>
+        <div class="refeicao">
+            <img src="imagens/café.jpg" alt="Café">
+            <div><span class="tipo-refeicao">Café da Manhã:</span> Café ou chá com adoçante.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://www.confeiteiradesucesso.com/wp-content/uploads/2024/01/bifecomcebola.jpg" alt="Almoço">
+            <div><span class="tipo-refeicao">Almoço:</span> 01 bife grande e frutas à vontade.</div>
+        </div>
+        <div class="refeicao">
+            <img src="https://images.unsplash.com/photo-1513442542250-854d436a73f2?w=200" alt="Jantar">
+            <div><span class="tipo-refeicao">Jantar:</span> Comer o que quiser dentro do regime.</div>
+        </div>
+    </div>
+
+    <footer class="rodape-observacao">
+        <p><strong>Observação Importante:</strong> Esta dieta é altamente restritiva e não deve ser seguida por mais de
+            7 dias. Consulte sempre um médico ou nutricionista antes de iniciar qualquer mudança radical na sua
+            alimentação.</p>
+        <p>Depois de completar os 07 dias e ter emagrecido mais ou menos 06 kg, você poderá voltar aos seus hábitos
+            alimentares normais e não engordará durante 07 anos, pois modificou o metabolismo do corpo. Não pode alterar
+            a ordem dos alimentos e nem os dias, seguir rigorosamente o dia, pode tomar chá a vontade com adoçante. Caso
+            queira emagrecer mais, recomeçar o regime no 12º dia.</p>
+        <p><strong>BOA SORTE!!!</strong></p>
+        <p>© 2026 - Meu Guia de Dieta Japonesa</p>
+    </footer>
+
+    <!-- LÓGICA DA CALCULADORA (JAVASCRIPT) -->
+    <script>
+        function calcularIMC() {
+            const peso = document.getElementById('peso').value;
+            const altura = document.getElementById('altura').value;
+            const resultado = document.getElementById('resultado-imc');
+
+            if (peso !== '' && altura !== '') {
+                const imc = (peso / (altura * altura)).toFixed(2);
+                let mensagem = '';
+
+                if (imc < 18.5) mensagem = 'Abaixo do peso';
+                else if (imc < 25) mensagem = 'Peso normal';
+                else if (imc < 30) message = 'Sobrepeso';
+                else mensagem = 'Obesidade';
+
+                resultado.innerHTML = `Seu IMC é ${imc} (${mensagem})`;
+                resultado.style.color = "#b71c1c";
+            } else {
+                resultado.innerHTML = "Por favor, preencha o peso e a altura.";
+                resultado.style.color = "orange";
+            }
+        }
+
+        // NOVA FUNÇÃO PARA LIMPAR OS CAMPOS
+        function limparIMC() {
+            document.getElementById('peso').value = '';
+            document.getElementById('altura').value = '';
+            document.getElementById('resultado-imc').innerHTML = '';
+        }
+    </script>
+
+</body>
+
+</html>
